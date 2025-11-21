@@ -68,6 +68,7 @@ body {
 }
 
 .round-count {
+    margin-top: 40px;
     background-color: blueviolet;
 }
 
@@ -76,4 +77,34 @@ body {
     background-color: brown;
     width: 100px;
     height: 50px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.time-bar {
+    margin-top: 40px;
+    background-color: gray;
+    height: 60px;
+    width: 200px;
+    position: relative;
+}
+
+.time-progress {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    align-content: center;
+}
+
+.startBtn {
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 500px;
+}
+
+.level {
+    text-align: center;
+    font-size: 30px;
 }
