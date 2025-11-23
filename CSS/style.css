@@ -11,8 +11,8 @@ body {
     display: flex;
     background-color: aquamarine;
     justify-content: space-between;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 32.5px;
+    margin-right: 32.5px;
     margin-top: 50px;;
 }
 
@@ -87,25 +87,40 @@ body {
     background-color: gray;
     height: 60px;
     width: 200px;
-    position: relative;
+    /* position: relative; */
 }
 
 .time-progress {
     background-color: red;
     height: 100%;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     text-align: center;
     align-content: center;
 }
 
 .startBtn {
-    position: absolute;
-    margin-left: 50%;
-    margin-top: 500px;
+    /* position: absolute; */
+    /* margin-left: 50%;
+    margin-top: 500px; */
+    background-color: aqua;
+    border: 5px solid red;
+    /* width: 50px; */
+}
+.btnCon {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    margin-left: 65px;
 }
 
 .level {
     text-align: center;
     font-size: 30px;
+}
+
+.key1 {
+    height: 80px;
+    width: 80px;
+    display: none;
 }

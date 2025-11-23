@@ -2,23 +2,59 @@ const Btn = document.querySelector(".startBtn")
 const roundCount = document.querySelector(".text")
 const timeBar = document.querySelector(".time-progress")
 const timeLeft = document.querySelector(".time-left")
+const key = document.querySelector(".key1")
 
-Btn.addEventListener('click', ()=> {
-    let interval = 10
+let compArray = ["a", "b", "c"]
+let userArray = ["", "", ""]
+let generateNum = Math.floor(Math.random() * compArray.length);
+let randomValue = compArray[generateNum]
 
-    let countDown = setInterval(function(){
-        interval--;
-        let barWidth = interval * 10
-        if(interval >= 0){
-            timeBar.style.width = barWidth + '%'
-            //console.log(typeof interval + '%')
-            timeLeft.innerHTML = interval
-        } else{
-            clearInterval(countDown)
-            timeBar.style.width = "0%"
-            timeBar.innerHTML = 'Game Over'
-            return;
+function startCountDown() {
+        let interval = 10
+            let countBar = setInterval(function () {
+                interval--;
+                let barWidth = interval * 10
+                if (interval >= 0) {
+                    timeBar.style.width = barWidth + '%'
+                    timeLeft.innerHTML = interval
+                } else {
+                    clearInterval(countBar)
+                    timeBar.style.width = "0%"
+                    timeBar.innerHTML = "Game Over"
+                }
+            }, 1000)
+        Btn.remove()
+}
+
+function keyDisplay() {
+    setTimeout(()=>{
+            key.innerHTML = randomValue
+            key.style.display = "block"
+        }, 5000)
+        
+        setTimeout(()=>{
+            key.style.display = "none"
+        },6000)
+}
+
+function userInput() {
+    document.addEventListener('keydown',(event)=>{
+        if(userArray === randomValue){
+            key.style.display = "block"
+            key.style.backgroundColor = "green"
+        } else {
+            key.style.display = "block"
+            key.style.backgroundColor = "red"
         }
-    }, 1000)
-    Btn.remove();
-});
+    })
+}
+
+function startGame() {
+   startCountDown()
+   keyDisplay()
+   userInput()
+}
+
+Btn.addEventListener('click', startGame)
+
+  
