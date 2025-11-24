@@ -2,12 +2,14 @@ const Btn = document.querySelector(".startBtn")
 const roundCount = document.querySelector(".text")
 const timeBar = document.querySelector(".time-progress")
 const timeLeft = document.querySelector(".time-left")
-const key = document.querySelector(".key1")
+const key = document.querySelectorAll(".key")
 
 let compArray = ["a", "b", "c"]
 let userArray = []
-let generateNum = Math.floor(Math.random() * compArray.length);
-let randomValue = compArray[generateNum]
+//let generateNum = Math.floor(Math.random() * compArray.length);
+let randomValue //= compArray[generateNum]
+//console.log(randomValue);
+
 
 
 function startCountDown() {
@@ -28,14 +30,20 @@ function startCountDown() {
 }
 
 function keyDisplay() {
+    let generateNum = Math.floor(Math.random() * compArray.length);
+    randomValue = compArray[generateNum]
         setTimeout(()=>{
-            key.innerHTML = randomValue
-            key.style.display = "block"
+            key.forEach(k => {
+                k.innerHTML = randomValue
+                k.style.display = "block"    
+            }); 
         }, 5000)
         
         setTimeout(()=>{
-            key.style.display = "none"
-            document.addEventListener('keydown',handleKeyDown)
+            key.forEach(k => {
+                k.style.display = "none"
+                document.addEventListener('keydown',handleKeyDown)
+            }); 
 
         },6000)
 }
@@ -44,21 +52,26 @@ function handleKeyDown(event){
             userArray.push(event.key)
             //console.log(userArray);
         if(event.key === randomValue){
-            Btn.innerHTML = event.key.innerHTML
-            key.style.display = "block"
-            key.style.backgroundColor = "green"
+            key.forEach(k => {
+                //Btn.innerHTML = event.key
+                k.style.display = "block"
+                k.style.backgroundColor = "green"
+                //document.removeEventListener('keydown',handleKeyDown)  
+            }); 
         } else {
-            key.style.display = "block"
-            key.style.backgroundColor = "red"
+            key.forEach(k => {
+                k.style.display = "block"
+                k.style.backgroundColor = "red"
+                //document.removeEventListener('keydown',handleKeyDown)
+            }); 
         }
+        document.removeEventListener('keydown',handleKeyDown)
     }
 
 function startGame() {
    startCountDown()
    keyDisplay()
-   userInput()
+   //handleKeyDown()
 }
 
 Btn.addEventListener('click', startGame)
-
-  
