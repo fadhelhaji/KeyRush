@@ -1,13 +1,12 @@
 const Btn = document.querySelector(".startBtn")
+const clickBtn = document.querySelector(".clicker")
 const roundCount = document.querySelector(".text")
 const timeBar = document.querySelector(".time-progress")
 const timeLeft = document.querySelector(".time-left")
 const key = document.querySelectorAll(".key")
+
 const answers = []
 let compArray = ["a", "b", "c"]
-//let generateNum = Math.floor(Math.random() * compArray.length);
-let randomValue //= compArray[generateNum]
-//console.log(randomValue);
 let interval;
 
 function startCountDown() {
@@ -17,7 +16,7 @@ function startCountDown() {
                 let barWidth = interval * 10
                 if (interval >= 0) {
                     timeBar.style.width = barWidth + '%'
-                    timeLeft.innerHTML = interval
+                    timeLeft.innerHTML = interval.toFixed(0)
                 } else {
                     clearInterval(countBar)
                     timeBar.style.width = "0%"
@@ -25,6 +24,8 @@ function startCountDown() {
                 }
             }, 1000)
         Btn.remove()
+        clickBtn.style.display = "block"
+        
 }
 
 function keyDisplay() {
@@ -102,9 +103,22 @@ function wrongAns() {
     interval -= 1
 }
 
+function addTime() {
+    clickBtn.addEventListener('click', ()=>{
+        if(interval < 10) {
+            interval += 0.25
+            
+            let barWidth = interval * 10
+            timeBar.style.width = barWidth + '%'
+            timeLeft.innerHTML = interval.toFixed(0)
+        }
+    })
+}
+
 function startGame() {
    startCountDown()
    keyDisplay()
+   addTime()
 }
 
 Btn.addEventListener('click', startGame)

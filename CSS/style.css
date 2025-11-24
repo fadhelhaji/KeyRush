@@ -124,3 +124,11 @@ body {
     width: 80px;
     display: none;
 }
+
+.clicker {
+    background-color: rebeccapurple;
+    height: 150px;
+    width: 150px;
+    display: none;
+    border-radius: 50%;
+}
