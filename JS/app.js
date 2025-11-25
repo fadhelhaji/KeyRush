@@ -93,9 +93,7 @@ function startCountDown() {
                     timeBar.innerHTML = "Game Over"
                 }
             }, 1000)
-        Btn.remove()
-        clickBtn.style.display = "block"
-        
+        Btn.remove()        
 }
 
 function keyDisplay() {
@@ -126,7 +124,7 @@ function keyDisplay() {
 function handleKeyDown(event) { 
     let userEntry = event.key
     let element = currentRoundKeys()[counter];
-    if(userEntry === currentExpectedKey && !isGameOver) { //USER HAS INPUTTED THE CORRECT KEY
+    if(userEntry === currentExpectedKey && !isGameOver) { //USER HAS INPUTTED THE CORRECT KEY, THEN IT STARTS OVER
         element.textContent = event.key
         element.style.backgroundColor = "green"
         element.style.display = "block"
@@ -162,14 +160,12 @@ function displayRoundEntries() {
 
 function nextRound() {
     level += 1
-    shuffle(compArray) //Array is shuffed again
+    shuffle(compArray)
     interval = 10
-    //Do the shit where you call the randomized array to be diplsyaed to the user
     bottom2.style.display = "block"
     keyDisplay()
     currentRoundEntries()
-    //call the previous function which is the handleKeyDown
-    //Note that you should handle the rounds depending on the current round eg. if at round 1 atm, on game over, end round 1 and start 2 etc......
+
 }
 
 function wrongAns() {
@@ -188,23 +184,6 @@ function addTime() {
         caught()
     })
 }
-
-
-// function bottom(){
-    //     bottom1.style.display = "none"
-    // }
-    
-    function proceedNext(){
-        if (compArray.length !== answers.length) {
-            console.log(answers.length)
-            return false;
-        } else {
-            console.log('salman')
-            compArray.every((value, index) => value === answers[index])
-            roundCount.innerHTML = "Level.2"
-        }
-        bottom1.style.display = "none"
-    }
     
     function difficulty(){
         let fish = Math.floor(Math.random() * fishEasy.length);
@@ -235,10 +214,8 @@ function addTime() {
     function startGame() {
        startCountDown()
        keyDisplay()
-       addTime()
-       //bottom()
+       //addTime()
        difficulty()
-       proceedNext()
     }
     
     
