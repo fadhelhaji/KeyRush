@@ -47,18 +47,35 @@ body {
 
 }
 
-.bottom-console {
+.bottom-console-round1 {
     display: flex;
     align-items: start;
+    /* display: none; */
 }
 
-.bottom-console-item {
+.bottom-console-item1 {
     display: flex;
     justify-content: center;
     align-items: center;
     border: black solid 2px;
     height: 200px;
     width: 400px;
+    gap: 30px;
+}
+
+.bottom-console-round2 {
+    display: flex;
+    align-items: start;
+    display: none;
+}
+
+.bottom-console-item2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black solid 2px;
+    height: 200px;
+    width: 650px;
     gap: 30px;
 }
 
@@ -79,7 +96,7 @@ body {
     width: 100px;
     height: 50px;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .time-bar {
