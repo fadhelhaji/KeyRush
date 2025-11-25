@@ -6,6 +6,9 @@ const timeLeft = document.querySelector(".time-left")
 const keys = document.querySelectorAll(".key")
 const keys1 = document.querySelectorAll(".key1")
 const keys2 = document.querySelectorAll(".key2")
+const bottom1 = document.querySelector(".bottom-console-round1")
+const bottom2 = document.querySelector(".bottom-console-round2")
+const bottom3 = document.querySelector(".bottom-console-round3")
 
 let currentRoundKeys = () => {
     if (level === 1) {
@@ -15,48 +18,54 @@ let currentRoundKeys = () => {
     } else if (level === 3){
         return keys2
     } else {
-        return 10    
+        return console.log("ERROR");
     }
 }
 
 let currentRoundEntries = () => {
+    interval = 11
+
     if (level === 2){
-        
-        setInterval(()=>{
-            bottom2.style.display = "block"
+        setTimeout(() => {
+            bottom1.style.display = "none"
         }, 1000)
+
+        setTimeout(() => {
+            bottom2.style.display = "block"
+        }, 1200)
+    } else if (level === 3){
+        setTimeout(() => {
+            bottom2.style.display = "none"
+        }, 1000)
+
+        setTimeout(() => {
+            bottom3.style.display = "block"
+        }, 1200)
     }
 }
-console.log(currentRoundKeys)
 
-// console.log(keys)
-const bottom1 = document.querySelector(".bottom-console-round1")
-const bottom2 = document.querySelector(".bottom-console-round2")
-const bottom3 = document.querySelector(".bottom-console-round3")
 
 
 const answers = []
-let compArray = ["a", "b", "c", "d", "e"]
+let compArray = ["a", "b", "c", "d", "e", "f", "g"]
 
 let interval;
 let level = 1
 
-const fishEasy = [
+const fishes = [
+  // Easy
   { name: "Coral Snapper", difficulty: 1 },
   { name: "Blue Minnow", difficulty: 1 },
   { name: "Silver Darter", difficulty: 1 },
-];
-
-const fishMedium = [
   { name: "Golden Pike", difficulty: 2 },
   { name: "Shadow Trout", difficulty: 2 },
   { name: "Spotted Barrin", difficulty: 2 },
-];
-const fishHard = [
   { name: "Crimson Fangfish", difficulty: 3 },
   { name: "Titan Grouper", difficulty: 3 },
-  { name: "Abyss Serpentfin", difficulty: 3 }
+  { name: "Abyss Serpentfin", difficulty: 3 },
 ];
+
+
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -75,14 +84,35 @@ function shuffle(array) {
 }
 
 shuffle(compArray)
-console.log(compArray)
 
+let randomFishIndex = Math.floor(Math.random() * fishes.length);
+let shuffleFish = fishes[randomFishIndex];
 
-function startCountDown() {
-            roundCount.innerHTML = "LEVEL.1"
-            interval = 10;
-            let countBar = setInterval(function () {
-                interval--;
+function fishResistanceBar() {
+            roundCount.innerHTML = "Round" + " " + level
+            if (shuffleFish.difficulty === 1) {
+                interval = 5;
+                countDown()
+                reelFishEasy()
+                caughtFish()
+            } else if (shuffleFish.difficulty === 2) {
+                interval = 3
+                countDown()
+                reelFishMed() 
+                caughtFish()
+            } else {
+                interval = 2
+                countDown()
+                reelFishHard()
+                caughtFish()
+            }
+            Btn.remove()
+            clickBtn.style.display = "block"
+}
+
+function countDown() {
+    let countBar = setInterval(function () {
+                interval-=0.25;
                 let barWidth = interval * 10
                 if (interval >= 0) {
                     timeBar.style.width = barWidth + '%'
@@ -93,37 +123,35 @@ function startCountDown() {
                     timeBar.innerHTML = "Game Over"
                 }
             }, 1000)
-        Btn.remove()        
 }
 
 function keyDisplay() {
         console.log("current lvl: " + level)
-        const currentRoundKeys = level == 1 ? keys : keys1
-         
+     
         setTimeout(()=>{
-      
-            currentRoundKeys.forEach((k, index) => {
+            currentRoundKeys().forEach((k, index) => {
                 k.textContent = compArray[index]
                 k.style.display = "block"    
             }); 
         }, 2000)
         
         setTimeout(()=>{
-            currentRoundKeys.forEach(k => {
+            currentRoundKeys().forEach(k => {
                 k.style.display = "none"
             }); 
             document.addEventListener('keypress',handleKeyDown)
-        },3000)
+        },5000)
     }
 
     let counter = 0
-
     let currentExpectedKey = compArray[counter]
     let isGameOver = false;
+    let element;
+    let userEntry;
 
 function handleKeyDown(event) { 
-    let userEntry = event.key
-    let element = currentRoundKeys()[counter];
+    userEntry = event.key
+    element = currentRoundKeys()[counter];
     if(userEntry === currentExpectedKey && !isGameOver) { //USER HAS INPUTTED THE CORRECT KEY, THEN IT STARTS OVER
         element.textContent = event.key
         element.style.backgroundColor = "green"
@@ -134,10 +162,8 @@ function handleKeyDown(event) {
 
         if(counter == currentRoundKeys().length) { //IF THE USER HAS INPUTTED ALL KEYS CORRECTLY
             console.log("Victory")
-            setTimeout(()=>{
-                    bottom1.style.display = "none"
-        },2000)
             nextRound()
+            reelFish()
         }
     } 
     else { //USER HAS INPUTTED THE WRONG KEY
@@ -145,51 +171,69 @@ function handleKeyDown(event) {
         element.style.backgroundColor = "red"
         element.style.display = "block"
         isGameOver = true 
-
-        
-         setTimeout(()=>{
-                    bottom1.style.display = "none"
-        },2000)
     }
 
-}
-
-function displayRoundEntries() {
-    
 }
 
 function nextRound() {
     level += 1
     shuffle(compArray)
-    interval = 10
-    bottom2.style.display = "block"
     keyDisplay()
+    counter = 0
+    currentExpectedKey = compArray[counter]
+    isGameOver = false;
     currentRoundEntries()
-
 }
 
-function wrongAns() {
-    interval -= 1
-}
-
-function addTime() {
+function reelFishEasy() {
     clickBtn.addEventListener('click', ()=>{
         if(interval < 10) {
-            interval += 0.25
+            interval += 0.75
             
             let barWidth = interval * 10
             timeBar.style.width = barWidth + '%'
             timeLeft.innerHTML = interval.toFixed(0)
         }
-        caught()
     })
+}
+
+function reelFishMed() {
+    clickBtn.addEventListener('click', ()=>{
+        if(interval < 10) {
+            interval += 0.5
+            
+            let barWidth = interval * 10
+            timeBar.style.width = barWidth + '%'
+            timeLeft.innerHTML = interval.toFixed(0)
+        }
+    })
+}
+
+function reelFishHard() {
+    clickBtn.addEventListener('click', ()=>{
+        if(interval < 10) {
+            interval += 0.15
+            
+            let barWidth = interval * 10
+            timeBar.style.width = barWidth + '%'
+            timeLeft.innerHTML = interval.toFixed(0)
+        }
+    })
+}
+
+function caughtFish () {
+    if (interval >= 10) {
+            clearInterval(countBar);
+            console.log("🎣 CAUGHT!");
+            timeBar.style.width = "100%";
+            return;
+        }
 }
     
     function difficulty(){
         let fish = Math.floor(Math.random() * fishEasy.length);
         console.log(fish);
         if (roundCount.innerHTML === 'LEVEL.1') {
-            // console.log("ush");
             if (fish === 0) {
                 console.log(fishEasy[0])
             }
@@ -202,20 +246,10 @@ function addTime() {
         }
     }
     
-    function caught() {
-        let barIsFull = false;
-        bar = parseInt(timeBar.style.width)
-        if (bar === 100 && !barIsFull) {
-            console.log("You caught a fish!");
-            barIsFull = true;
-        }
-    }
+
     
     function startGame() {
-       startCountDown()
-       keyDisplay()
-       //addTime()
-       difficulty()
+        keyDisplay()
     }
     
     
