@@ -4,6 +4,31 @@ const roundCount = document.querySelector(".text")
 const timeBar = document.querySelector(".time-progress")
 const timeLeft = document.querySelector(".time-left")
 const keys = document.querySelectorAll(".key")
+const keys1 = document.querySelectorAll(".key1")
+const keys2 = document.querySelectorAll(".key2")
+
+let currentRoundKeys = () => {
+    if (level === 1) {
+        return keys
+    } else if (level === 2 ){
+        return keys1
+    } else if (level === 3){
+        return keys2
+    } else {
+        return 10    
+    }
+}
+
+let currentRoundEntries = () => {
+    if (level === 2){
+        
+        setInterval(()=>{
+            bottom2.style.display = "block"
+        }, 1000)
+    }
+}
+console.log(currentRoundKeys)
+
 // console.log(keys)
 const bottom1 = document.querySelector(".bottom-console-round1")
 const bottom2 = document.querySelector(".bottom-console-round2")
@@ -74,16 +99,19 @@ function startCountDown() {
 }
 
 function keyDisplay() {
-    
+        console.log("current lvl: " + level)
+        const currentRoundKeys = level == 1 ? keys : keys1
+         
         setTimeout(()=>{
-            keys.forEach((k, index) => {
-                k.innerHTML = compArray[index]
+      
+            currentRoundKeys.forEach((k, index) => {
+                k.textContent = compArray[index]
                 k.style.display = "block"    
             }); 
         }, 2000)
         
         setTimeout(()=>{
-            keys.forEach(k => {
+            currentRoundKeys.forEach(k => {
                 k.style.display = "none"
             }); 
             document.addEventListener('keypress',handleKeyDown)
@@ -97,33 +125,49 @@ function keyDisplay() {
 
 function handleKeyDown(event) { 
     let userEntry = event.key
-    let element = keys[counter];
-    if(userEntry === currentExpectedKey && !isGameOver) {
+    let element = currentRoundKeys()[counter];
+    if(userEntry === currentExpectedKey && !isGameOver) { //USER HAS INPUTTED THE CORRECT KEY
         element.textContent = event.key
         element.style.backgroundColor = "green"
         element.style.display = "block"
         currentExpectedKey = compArray[counter+1]
         counter++;
+        console.log("counter and array length" + counter + " " + currentRoundKeys().length)
+
+        if(counter == currentRoundKeys().length) { //IF THE USER HAS INPUTTED ALL KEYS CORRECTLY
+            console.log("Victory")
+            setTimeout(()=>{
+                    bottom1.style.display = "none"
+        },2000)
+            nextRound()
+        }
     } 
-    else {
+    else { //USER HAS INPUTTED THE WRONG KEY
+        console.log("defeat")
         element.style.backgroundColor = "red"
         element.style.display = "block"
-        isGameOver = true
+        isGameOver = true 
+
         
          setTimeout(()=>{
                     bottom1.style.display = "none"
-                    nextRound()
         },2000)
     }
 
 }
 
+function displayRoundEntries() {
+    
+}
+
 function nextRound() {
+    level += 1
     shuffle(compArray) //Array is shuffed again
     interval = 10
     //Do the shit where you call the randomized array to be diplsyaed to the user
     bottom2.style.display = "block"
-    handleKeyDown()
+    keyDisplay()
+    currentRoundEntries()
     //call the previous function which is the handleKeyDown
     //Note that you should handle the rounds depending on the current round eg. if at round 1 atm, on game over, end round 1 and start 2 etc......
 }
