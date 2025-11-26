@@ -2,7 +2,6 @@
 //CACHE
 //
 
-const Btn = document.querySelector(".startBtn")
 const clickBtn = document.querySelector(".clicker")
 const roundCount = document.querySelector(".text")
 const timeBar = document.querySelector(".time-progress")
@@ -293,7 +292,6 @@ function addTime(selectedFish) {
 }
 
 function startGame() {
-    Btn.remove()
     hookFish()
 }
 
@@ -302,11 +300,11 @@ function enterGame() {
     enterGameBtn.style.display = "none"
     intructionsBtn.style.display = "none"
     document.body.style.backgroundImage = 'none';
-    topDiv.style.display = "flex"
-    Btn.style.display = "flex"
+    topDiv.style.display = "block"
+    document.body.style.backgroundImage = "block"
+    startGame()
 }
 
 enterGameBtn.addEventListener('click', enterGame)
 
-Btn.addEventListener('click', startGame)
 clickBtn.addEventListener("click", () => addTime(selectedFish));
