@@ -22,8 +22,10 @@ let currentRoundKeys = () => {
     }
 }
 
+let countBar;
+
 let currentRoundEntries = () => {
-    interval = 11
+    // interval = 11
 
     if (level === 2){
         setTimeout(() => {
@@ -94,36 +96,38 @@ function fishResistanceBar() {
                 interval = 5;
                 countDown()
                 reelFishEasy()
-                caughtFish()
+                // caughtFish()
             } else if (shuffleFish.difficulty === 2) {
                 interval = 3
                 countDown()
                 reelFishMed() 
-                caughtFish()
+                // caughtFish()
             } else {
                 interval = 2
                 countDown()
                 reelFishHard()
-                caughtFish()
+                // caughtFish()
             }
             Btn.remove()
             clickBtn.style.display = "block"
 }
 
 function countDown() {
-    let countBar = setInterval(function () {
-                interval-=0.25;
-                let barWidth = interval * 10
-                if (interval >= 0) {
-                    timeBar.style.width = barWidth + '%'
-                    timeLeft.innerHTML = interval.toFixed(0)
-                } else {
-                    clearInterval(countBar)
-                    timeBar.style.width = "0%"
-                    timeBar.innerHTML = "Game Over"
-                }
-            }, 1000)
+    countBar = setInterval(function () {
+        interval -= 0.25;
+        let barWidth = interval * 10;
+        
+        if (interval >= 0) {
+            timeBar.style.width = barWidth + '%';
+            timeLeft.innerHTML = interval.toFixed(0);
+        } else {
+            clearInterval(countBar);
+            timeBar.style.width = "0%";
+            timeLeft.innerHTML = "0";
+        }
+    }, 1000);
 }
+
 
 function keyDisplay() {
         console.log("current lvl: " + level)
@@ -163,7 +167,6 @@ function handleKeyDown(event) {
         if(counter == currentRoundKeys().length) { //IF THE USER HAS INPUTTED ALL KEYS CORRECTLY
             console.log("Victory")
             nextRound()
-            reelFish()
         }
     } 
     else { //USER HAS INPUTTED THE WRONG KEY
@@ -249,6 +252,7 @@ function caughtFish () {
 
     
     function startGame() {
+        fishResistanceBar()
         keyDisplay()
     }
     
