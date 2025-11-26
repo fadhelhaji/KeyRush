@@ -50,7 +50,7 @@ body {
 .bottom-console-round1 {
     display: flex;
     align-items: start;
-    /* display: none; */
+    display: none;
 }
 
 .bottom-console-item1 {
@@ -120,16 +120,16 @@ body {
     background-color: gray;
     height: 60px;
     width: 200px;
-    /* position: relative; */
+    display: none;
 }
 
 .time-progress {
     background-color: red;
     height: 100%;
     width: 100%;
-    /* position: absolute; */
     text-align: center;
     align-content: center;
+    display: none;
 }
 
 .startBtn {
