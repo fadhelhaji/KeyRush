@@ -15,7 +15,6 @@ body {
     margin-right: 32.5px;
     margin-top: 50px;
     display: none;
-    background-color: aqua;
 }
 
 .objective-items {
@@ -135,11 +134,23 @@ body {
 .startBtn {
     border: 5px solid red;
     display: none;
+    margin-top: 100px;
+    width: 150px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-align: center;
+    display: none;
 }
+
 .btnCon {
     display: flex;
     justify-content: center;
-    margin-left: 65px;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .level {

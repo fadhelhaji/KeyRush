@@ -14,6 +14,10 @@ const keys2 = document.querySelectorAll(".key2")
 const roundOneConsole = document.querySelector(".bottom-console-round1")
 const roundTwoConsole = document.querySelector(".bottom-console-round2")
 const roundThreeConsole = document.querySelector(".bottom-console-round3")
+const enterGameBtn = document.querySelector(".enterBtn")
+const gamePage = document.querySelector(".gameTitle")
+const intructionsBtn = document.querySelector(".helpBtn")
+const topDiv = document.querySelector(".objective-container")
 
 //
 //VARIABLES
@@ -64,7 +68,6 @@ function shuffle(array) {
         }
     }
     shuffle(compArray)
-    console.log(compArray)
 
 //
 //ARRAYS
@@ -111,7 +114,7 @@ function handleKeyDown(event) {
     userEntry = event.key;
     element = currentRoundKeys()[counter];
     currentExpectedKey = compArray[counter];
-    console.log(currentExpectedKey)
+    //console.log(currentExpectedKey)
     if (userEntry === currentExpectedKey) { 
         // console.log(compArray)
         checkFishHooked(); 
@@ -131,7 +134,7 @@ function checkFishHooked() {
     element.style.display = "block";
 
     checkAllKeys()
-    console.log("You hooked the fish");
+    //console.log("You hooked the fish");
 }
 
 function checkNotHooked() {
@@ -293,6 +296,17 @@ function startGame() {
     Btn.remove()
     hookFish()
 }
+
+function enterGame() {
+    gamePage.style.display = "none"
+    enterGameBtn.style.display = "none"
+    intructionsBtn.style.display = "none"
+    document.body.style.backgroundImage = 'none';
+    topDiv.style.display = "flex"
+    Btn.style.display = "flex"
+}
+
+enterGameBtn.addEventListener('click', enterGame)
 
 Btn.addEventListener('click', startGame)
 clickBtn.addEventListener("click", () => addTime(selectedFish));
