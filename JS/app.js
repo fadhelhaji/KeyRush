@@ -17,6 +17,7 @@ const enterGameBtn = document.querySelector(".enterBtn")
 const gamePage = document.querySelector(".gameTitle")
 const intructionsBtn = document.querySelector(".helpBtn")
 const topDiv = document.querySelector(".objective-container")
+const resetBtn = document.querySelector(".resetBtn");
 
 //
 //VARIABLES
@@ -66,7 +67,6 @@ function shuffle(array) {
           array[randomIndex], array[currentIndex]];
         }
     }
-    shuffle(compArray)
 
 //
 //ARRAYS
@@ -89,6 +89,8 @@ const fishes = [
 
 function keyDisplay() {
         console.log("current lvl: " + level)
+
+        shuffle(compArray)
      
         setTimeout(()=>{
             currentRoundKeys().forEach((k, index) => {
@@ -150,6 +152,7 @@ function checkNotHooked() {
         } else if (level === 3) {
             roundThreeConsole.style.display = "none";
         }
+        gameOver()
     }, 2000);
 }
 
@@ -194,13 +197,19 @@ function fishStrengthMeter() {
 
 
         if (interval <= 0) {
-            clearInterval(countBar);
-            console.log("Bar empty!");
-        }
+        clearInterval(countBar);
+        console.log("Bar empty!");
+
+        isGameOver = true;
+        gameOver();
+        timeBar.style.display = "none";
+        timeBarBackground.style.display = "none";
+        clickBtn.style.display = "none";
+    }
 
         if (interval >= 10) {
             clearInterval(countBar);
-            console.log("Bar full! Proceeding to next level in 2s...");
+            console.log("Bar full!");
 
             timeBar.style.display = "none";
             timeBarBackground.style.display = "none";
@@ -299,11 +308,24 @@ function enterGame() {
     gamePage.style.display = "none"
     enterGameBtn.style.display = "none"
     intructionsBtn.style.display = "none"
-    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundImage = "url('./Pictures/during-gameplay-image.png')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
     topDiv.style.display = "block"
-    document.body.style.backgroundImage = "block"
     startGame()
 }
+
+function gameOver() {
+    resetBtn.style.display = "block"
+    document.body.style.backgroundImage = "url('./Pictures/gameover.png')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+}
+resetBtn.addEventListener("click", ()=>{
+    window.location.reload();
+});
 
 enterGameBtn.addEventListener('click', enterGame)
 
