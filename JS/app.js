@@ -11,16 +11,15 @@ const timeLeft = document.querySelector(".time-left")
 const keys = document.querySelectorAll(".key")
 const keys1 = document.querySelectorAll(".key1")
 const keys2 = document.querySelectorAll(".key2")
-const bottom1 = document.querySelector(".bottom-console-round1")
-const bottom2 = document.querySelector(".bottom-console-round2")
-const bottom3 = document.querySelector(".bottom-console-round3")
+const roundOneConsole = document.querySelector(".bottom-console-round1")
+const roundTwoConsole = document.querySelector(".bottom-console-round2")
+const roundThreeConsole = document.querySelector(".bottom-console-round3")
 
 //
 //VARIABLES
 //
 
 let compArray = ["a", "b", "c", "d", "e", "f", "g"]
-// const answers = []
 let level = 1;
 let interval;
 let counter = 0;
@@ -28,6 +27,7 @@ let currentExpectedKey = compArray[counter];
 let isGameOver = false;
 let element;
 let userEntry;
+let countBar;
 
 //
 //VARIABLE HELPERS
@@ -70,78 +70,20 @@ function shuffle(array) {
 //ARRAYS
 //
 
-// const fishes = [
-//   // Easy
-//   { name: "Coral Snapper", difficulty: 1 },
-//   { name: "Blue Minnow", difficulty: 1 },
-//   { name: "Silver Darter", difficulty: 1 },
-//   { name: "Golden Pike", difficulty: 2 },
-//   { name: "Shadow Trout", difficulty: 2 },
-//   { name: "Spotted Barrin", difficulty: 2 },
-//   { name: "Crimson Fangfish", difficulty: 3 },
-//   { name: "Titan Grouper", difficulty: 3 },
-//   { name: "Abyss Serpentfin", difficulty: 3 },
-// ];
+const fishes = [
+  { name: "Coral Snapper", difficulty: 1 },
+  { name: "Blue Minnow", difficulty: 1 },
+  { name: "Silver Darter", difficulty: 1 },
+  { name: "Golden Pike", difficulty: 2 },
+  { name: "Shadow Trout", difficulty: 2 },
+  { name: "Spotted Barrin", difficulty: 2 },
+  { name: "Crimson Fangfish", difficulty: 3 },
+  { name: "Titan Grouper", difficulty: 3 },
+  { name: "Abyss Serpentfin", difficulty: 3 },
+];
 
-
-
-
-// let countBar;
-
-// let currentRoundEntries = () => {
-
-//     if (level === 2){
-//         setTimeout(() => {
-//             bottom1.style.display = "none"
-//         }, 1000)
-
-//         setTimeout(() => {
-//             bottom2.style.display = "block"
-//         }, 1200)
-//     } else if (level === 3){
-//         setTimeout(() => {
-//             bottom2.style.display = "none"
-//         }, 1000)
-
-//         setTimeout(() => {
-//             bottom3.style.display = "block"
-//         }, 1200)
-//     }
-// }
-
-
-
-
-// let interval;
-// let level = 1
-
-
-
-
-
-// let randomFishIndex = Math.floor(Math.random() * fishes.length);
-// let shuffleFish = fishes[randomFishIndex];
-
-let countBar;
-
-function fishStrengthMeter() {
-    interval = 10
-    countBar = setInterval(function () {
-        interval--;
-        let barWidth = interval * 10;
-        
-        if (interval >= 0) {
-            timeBar.style.width = barWidth + '%';
-            // console.log(barWidth)
-            //timeLeft.innerHTML = interval.toFixed(0);
-        } else {
-            clearInterval(countBar);
-            timeBar.style.width = "0%";
-            // timeLeft.innerHTML = "0";
-        }
-    }, 1000);
-}
-
+    const randomIndex = Math.floor(Math.random() * fishes.length);
+    let selectedFish = fishes[randomIndex];
 
 function keyDisplay() {
         console.log("current lvl: " + level)
@@ -162,7 +104,9 @@ function keyDisplay() {
 }
 
 function handleKeyDown(event) { 
-    if (isGameOver) return; // Stop if game is over
+    if (isGameOver){
+        return;
+    } 
 
     userEntry = event.key;
     element = currentRoundKeys()[counter];
@@ -170,16 +114,14 @@ function handleKeyDown(event) {
     console.log(currentExpectedKey)
     if (userEntry === currentExpectedKey) { 
         // console.log(compArray)
-        checkFishHooked(); // correct key
+        checkFishHooked(); 
         counter++;
         currentExpectedKey = compArray[counter];
-        // console.log(currentExpectedKey)
         if (counter === currentRoundKeys().length) {
             console.log("All keys correct: round complete!");
-            // Add additional round-complete logic here
         }
     } else {
-        checkNotHooked(); // wrong key
+        checkNotHooked(); 
     }
 }
 
@@ -187,9 +129,7 @@ function checkFishHooked() {
     element.textContent = userEntry;
     element.style.backgroundColor = "green";
     element.style.display = "block";
-    // setTimeout(()=>{
-    //     bottom1.style.display = "none"
-    // }, 2000)
+
     checkAllKeys()
     console.log("You hooked the fish");
 }
@@ -199,74 +139,160 @@ function checkNotHooked() {
     element.style.display = "block";
     isGameOver = true;
     console.log("Defeat!");
-    setTimeout(()=>{
-        bottom1.style.display = "none"
-    }, 2000)
+
+    setTimeout(() => {
+        if (level === 1) {
+            roundOneConsole.style.display = "none";
+        } else if (level === 2) {
+            roundTwoConsole.style.display = "none";
+        } else if (level === 3) {
+            roundThreeConsole.style.display = "none";
+        }
+    }, 2000);
 }
 
 
-// // function nextRound() {
-// //     level += 1
-// //     shuffle(compArray)
-// //     keyDisplay()
-// //     counter = 0
-// //     currentExpectedKey = compArray[counter]
-// //     isGameOver = false;
-// //     currentRoundEntries()
-// // }
-   
 function hookFish() {
-    if (level ===1) {
-        setTimeout(()=>{
-            bottom1.style.display = "block"
-            keyDisplay()
-        }, 1000)
+    if (level === 1) {
+        roundOneConsole.style.display = "block";
+        keyDisplay();
+    } else if (level === 2) {
+        roundTwoConsole.style.display = "block";
+        keyDisplay();
+    } else if (level === 3) {
+        roundThreeConsole.style.display = "block";
+        keyDisplay();
     }
 }
 
-function displayFishStrengthMeter() {
-    timeBar.style.display = "block"
-    timeBarBackground.style.display = "block"
-    clickBtn.style.display = "block"
+function fishStrengthMeter() {
+    timeBar.style.display = "block";
+    timeBarBackground.style.display = "block";
+    clickBtn.style.display = "block";
 
-        interval = 10
+    if (selectedFish.difficulty === 1) {
+        interval = 8; 
+    } else if (selectedFish.difficulty === 2) {
+        interval = 5; 
+    } else {
+        interval = 3; 
+    }
+
+    timeBar.style.width = (interval * 10) + "%";
+
+    clearInterval(countBar);
+    const decrement = loseTime();
     countBar = setInterval(function () {
-        interval--;
-        let barWidth = interval * 10;
-        
-        if (interval >= 0) {
-            timeBar.style.width = barWidth + '%';
-            // console.log(barWidth)
-            //timeLeft.innerHTML = interval.toFixed(0);
-        } else {
+        interval -= decrement;
+        if (interval < 0) {
+            interval = 0;
+        }
+
+        timeBar.style.width = (interval * 10) + "%";
+
+
+        if (interval <= 0) {
             clearInterval(countBar);
-            timeBar.style.width = "0%";
-            // timeLeft.innerHTML = "0";
+            console.log("Bar empty!");
+        }
+
+        if (interval >= 10) {
+            clearInterval(countBar);
+            console.log("Bar full! Proceeding to next level in 2s...");
+
+            timeBar.style.display = "none";
+            timeBarBackground.style.display = "none";
+            clickBtn.style.display = "none";
+
+            setTimeout(() => {
+                hookFish();
+            }, 2000);
         }
     }, 1000);
 }
 
-
 function checkAllKeys() {
-let countFinal = 0
-            currentRoundKeys().forEach((k) => {
-                if(k.style.backgroundColor === 'green'){
-                    countFinal++
-                    console.log(countFinal)
-                    if(countFinal === 3){
-                        // console.log('fadhel')
-                        setTimeout(()=>{
-                            bottom1.style.display = "none"
-                            displayFishStrengthMeter()
-                        }, 2000)
-                        countFinal = 0
-                    }
-                }
-            });
+    const keys = currentRoundKeys();
+    let allGreen = true;
+    for (let index = 0; index < keys.length; index++) {
+        if (keys[index].style.backgroundColor !== "green") {
+            allGreen = false;
+            break;
+        }
+    }
+
+    if (allGreen) {
+        setTimeout(() => {
+            if (level === 1){
+                roundOneConsole.style.display = "none";
+            } 
+            if (level === 2) {
+                roundTwoConsole.style.display = "none";
+            }
+
+            level++;
+            console.log("Next level:", level);
+
+            counter = 0;
+            currentExpectedKey = compArray[counter];
+            shuffle(compArray);
+
+            const randomIndex = Math.floor(Math.random() * fishes.length);
+            selectedFish = fishes[randomIndex];
+            console.log("Next round fish:", selectedFish);
+
+            fishStrengthMeter();
+
+        }, 500);
+    }
 }
 
-            function startGame() {
-                Btn.remove()
-                hookFish()
-            }
-            Btn.addEventListener('click', startGame)
+function loseTime() {
+    
+        if (level === 1 && selectedFish.difficulty === 1) {
+            return 1
+        } else if (level === 2 && selectedFish.difficulty === 2) {
+            return 2
+        } else {
+            return 3
+        }
+}
+
+function addTime(selectedFish) {
+    let increase;
+    if (selectedFish.difficulty === 1) {
+        increase = 1;
+    } else if (selectedFish.difficulty === 2) {
+        increase = 0.55;
+    } else {
+        increase = 0.35;
+    }
+
+    interval += increase;
+    if (interval > 10){
+        interval = 10;
+    } 
+
+    timeBar.style.width = (interval * 10) + "%";
+
+    if (interval >= 10) {
+        clearInterval(countBar);
+        console.log("Bar full");
+
+        timeBar.style.display = "none";
+        timeBarBackground.style.display = "none";
+        clickBtn.style.display = "none";
+
+        setTimeout(() => {
+            hookFish();
+        }, 2000);
+    }
+}
+
+function startGame() {
+    Btn.remove()
+    hookFish()
+}
+
+Btn.addEventListener('click', startGame)
+clickBtn.addEventListener("click", () => addTime(selectedFish));
