@@ -15,9 +15,10 @@ const roundTwoConsole = document.querySelector(".bottom-console-round2")
 const roundThreeConsole = document.querySelector(".bottom-console-round3")
 const enterGameBtn = document.querySelector(".enterBtn")
 const gamePage = document.querySelector(".gameTitle")
-const intructionsBtn = document.querySelector(".helpBtn")
 const topDiv = document.querySelector(".time-container")
 const resetBtn = document.querySelector(".resetBtn");
+const helpBtn = document.querySelector(".helpBtn");
+const instructions = document.querySelector(".instructions");
 
 //
 //VARIABLES
@@ -307,7 +308,7 @@ function startGame() {
 function enterGame() {
     gamePage.style.display = "none"
     enterGameBtn.style.display = "none"
-    intructionsBtn.style.display = "none"
+    helpBtn.style.display = "none"
     document.body.style.backgroundImage = "url('./Pictures/during-gameplay-image.png')";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
@@ -323,6 +324,18 @@ function gameOver() {
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundRepeat = "no-repeat";
 }
+
+helpBtn.addEventListener("click", () => {
+    instructions.style.display = "block";
+
+    const closeOnKey = () => {
+        instructions.style.display = "none";
+        document.removeEventListener("keydown", closeOnKey);
+    };
+
+    document.addEventListener("keydown", closeOnKey);
+});
+
 resetBtn.addEventListener("click", ()=>{
     window.location.reload();
 });
