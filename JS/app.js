@@ -16,7 +16,7 @@ const roundThreeConsole = document.querySelector(".bottom-console-round3")
 const enterGameBtn = document.querySelector(".enterBtn")
 const gamePage = document.querySelector(".gameTitle")
 const intructionsBtn = document.querySelector(".helpBtn")
-const topDiv = document.querySelector(".objective-container")
+const topDiv = document.querySelector(".time-container")
 const resetBtn = document.querySelector(".resetBtn");
 
 //
@@ -250,7 +250,7 @@ function checkAllKeys() {
 
             const randomIndex = Math.floor(Math.random() * fishes.length);
             selectedFish = fishes[randomIndex];
-            console.log("Next round fish:", selectedFish);
+            //console.log(selectedFish);
 
             fishStrengthMeter();
 

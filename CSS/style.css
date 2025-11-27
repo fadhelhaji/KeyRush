@@ -9,9 +9,14 @@ body {
     background-size: cover;
     background-position: center;
     flex-direction: column;
+    font-family: "VT323", monospace;
 }
 
-.objective-container {
+button {
+    font-family: "VT323", monospace;
+}
+
+.time-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,6 +30,7 @@ body {
     height: 60px;
     width: 300px;
     display: none;
+    margin-top: 200px;
 }
 
 .time-progress {
@@ -39,7 +45,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 18%;
+    margin-bottom: 40%;
 }
 
 .bottom-console-round1 {
@@ -52,7 +58,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 2px;
+    border: none;
     height: 200px;
     width: 400px;
     gap: 30px;
@@ -68,7 +74,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 2px;
+    border: none;
     height: 200px;
     width: 650px;
     gap: 30px;
@@ -84,7 +90,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 2px;
+    border: none;
     height: 200px;
     width: 950px;
     gap: 30px;
@@ -109,22 +115,16 @@ body {
     font-size: 30px;
 }
 
-.key {
-    height: 80px;
-    width: 80px;
-    display: none;
-}
-
-.key1 {
-    height: 80px;
-    width: 80px;
-    display: none;
-}
-
+.key,
+.key1,
 .key2 {
     height: 80px;
     width: 80px;
     display: none;
+    font-size: 46px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .clicker {
@@ -166,6 +166,7 @@ body {
     font-size: 30px;
     border: 0px;
     box-shadow: 40px;
+    cursor: pointer;
 }
 
 .helpBtn {
@@ -175,12 +176,20 @@ body {
     border: slategray solid 5px;
     font-size: 30px;
     border: 0px;
+    cursor: pointer;
 }
 
 
 .resetBtn {
     display: none;
     position: absolute;
+    height: 100px;
+    width: 200px;
     margin-top: 800px;
     margin-right: 950px;
+    cursor: pointer;
+    font-size: 40px;
+    border: burlywood solid 3px;
+    margin-bottom: 40px;
+
 }
