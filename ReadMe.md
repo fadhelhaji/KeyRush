@@ -37,6 +37,7 @@ The game is deployed on GitHub Pages:
 ## Future improvements
 - Adding objectives that the user can complete in-game
 - Sound effects
+- Message display, such as between rounds
 
 ## Author
 Fadhel Haji
