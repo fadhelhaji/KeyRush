@@ -97,10 +97,14 @@ button {
 }
 
 .bottom-item {
-    border: black solid 2px;
+    border: none;
     height: 80px;
     width: 80px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border-radius: 50%;
+    }
 
 .btnCon {
     display: flex;
@@ -121,10 +125,13 @@ button {
     height: 80px;
     width: 80px;
     display: none;
+    border: none;
     font-size: 46px;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    border-radius: 50%;
+    border: solid 9px #36454F;
 }
 
 .clicker {
@@ -163,7 +170,7 @@ button {
     width: 300px;
     border-radius: 10px;
     border: slategray solid 5px;
-    font-size: 30px;
+    font-size: 40px;
     border: 0px;
     box-shadow: 40px;
     cursor: pointer;
@@ -174,7 +181,7 @@ button {
     width: 300px;
     border-radius: 10px;
     border: slategray solid 5px;
-    font-size: 30px;
+    font-size: 40px;
     border: 0px;
     cursor: pointer;
 }
@@ -189,7 +196,7 @@ button {
     margin-right: 950px;
     cursor: pointer;
     font-size: 40px;
-    border: burlywood solid 3px;
+    border: #6F4E37 solid 9px;
     margin-bottom: 40px;
 
 }
