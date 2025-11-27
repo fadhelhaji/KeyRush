@@ -260,15 +260,15 @@ function checkAllKeys() {
 }
 
 function loseTime() {
-    
-        if (level === 1 && selectedFish.difficulty === 1) {
-            return 1
-        } else if (level === 2 && selectedFish.difficulty === 2) {
-            return 2
-        } else {
-            return 3
-        }
+    if (selectedFish.difficulty === 1) {
+        return 1;
+    } else if (selectedFish.difficulty === 2) {
+        return 1.5; // smoother
+    } else {
+        return 2;   // not instant death
+    }
 }
+
 
 function addTime(selectedFish) {
     let increase;
