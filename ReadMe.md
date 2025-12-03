@@ -7,7 +7,7 @@
 3. Javascript
 
 ## Deployment
-The game is deployed on GitHub Pages: 
+The game is deployed on GitHub Pages: https://fadhelhaji.github.io/KeyRush/
 
 ## Features
 - Random sequence shows on the screen for a period of time
